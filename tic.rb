@@ -1,6 +1,7 @@
 class Player
-  def initialize(name)
+  def initialize(name, num)
     @name = name
+    @num = num
   end
 
 
@@ -22,4 +23,14 @@ _ _ _ _ _
   end
 end
 
-p board = Board.new
+# get user input for names
+puts "Please enter the name of the 1st player: "
+name1 = gets.chomp
+puts "Please enter the name of the 2nd player: "
+name2 = gets.chomp
+
+# generate players
+player1 = Player.new(name1, 1)
+player2 = Player.new(name2, 2)
+
+# p board = Board.new
