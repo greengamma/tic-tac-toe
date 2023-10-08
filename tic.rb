@@ -20,9 +20,39 @@ class Board
   end
 
   def update_board(field_pos)
-    if field_pos == 'init'
+    if field_pos == 'init' # display board on start
+      display_board
+    elsif # number already taken?
 
-    puts "#{@pos1} | #{@pos2} | #{@pos3}
+    else
+      case field_pos # assign value if position is valid, i.e. not occupied yet
+      when 1
+        @pos1 = sign
+      when 2
+        @pos2 = sign
+      when 3
+        @pos3 = sign
+      when 4
+        @pos4 = sign
+      when 5
+        @pos5 = sign
+      when 6
+        @pos6 = sign
+      when 7
+        @pos7 = sign
+      when 8
+        @pos8 = sign
+      when 9
+        @pos9 = sign
+      else
+        "Invalid number. Please enter one of the remaining numbers!"
+      end
+
+    end
+  end
+
+    def display_board
+      puts "#{@pos1} | #{@pos2} | #{@pos3}
 _ _ _ _ _
 
 #{@pos4} | #{@pos5} | #{@pos6}
@@ -30,19 +60,18 @@ _ _ _ _ _
 
 #{@pos7} | #{@pos8} | #{@pos9}"
     end
-  end
 
   def get_field_pos
     puts "Select a position (1-9): "
-    field_pos = gets.chomp
+    field_pos = (gets.chomp).to_i
     update_board(field_pos)
   end
 end
 
 # get user input for names
-puts "Please enter the name of the 1st player: "
+puts "Please enter the name of the 1st player (X): "
 name1 = gets.chomp
-puts "Please enter the name of the 2nd player: "
+puts "Please enter the name of the 2nd player (O): "
 name2 = gets.chomp
 
 # generate players
@@ -53,6 +82,6 @@ player2 = Player.new(name2, 'O')
 board = Board.new
 
 # get user input for field position
-#board.get_field_pos()
+board.get_field_pos
 
 # p board = Board.new
