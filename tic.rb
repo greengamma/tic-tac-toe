@@ -1,25 +1,41 @@
 class Player
-  def initialize(name, num)
+  def initialize(name, sign)
     @name = name
-    @num = num
+    @sign = sign
   end
-
-
 end
 
 class Board
   def initialize
-    puts '1 | 2 | 3
-_ _ _ _ _
-
-4 | 5 | 6
-_ _ _ _ _
-
-7 | 8 | 9'
+    @pos1 = 1
+    @pos2 = 2
+    @pos3 = 3
+    @pos4 = 4
+    @pos5 = 5
+    @pos6 = 6
+    @pos7 = 7
+    @pos8 = 8
+    @pos9 = 9
+    update_board('init')
   end
 
-  def update(field_pos)
+  def update_board(field_pos)
+    if field_pos == 'init'
 
+    puts "#{@pos1} | #{@pos2} | #{@pos3}
+_ _ _ _ _
+
+#{@pos4} | #{@pos5} | #{@pos6}
+_ _ _ _ _
+
+#{@pos7} | #{@pos8} | #{@pos9}"
+    end
+  end
+
+  def get_field_pos
+    puts "Select a position (1-9): "
+    field_pos = gets.chomp
+    update_board(field_pos)
   end
 end
 
@@ -30,7 +46,13 @@ puts "Please enter the name of the 2nd player: "
 name2 = gets.chomp
 
 # generate players
-player1 = Player.new(name1, 1)
-player2 = Player.new(name2, 2)
+player1 = Player.new(name1, 'X')
+player2 = Player.new(name2, 'O')
+
+# display initial board with field positions
+board = Board.new
+
+# get user input for field position
+#board.get_field_pos()
 
 # p board = Board.new
