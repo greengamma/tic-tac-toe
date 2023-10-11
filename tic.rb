@@ -22,6 +22,7 @@ class Board
     @pos8 = 8
     @pos9 = 9
     update_board('init', '_')
+    @pos_hash = {}
   end
 
   def update_board(field_pos, sign)
@@ -34,30 +35,39 @@ class Board
       when 1
         @pos1 = sign
         @taken_arr.push(1)
+        @pos_hash[1] = sign
       when 2
         @pos2 = sign
         @taken_arr.push(2)
+        @pos_hash[2] = sign
       when 3
         @pos3 = sign
         @taken_arr.push(3)
+        @pos_hash[3] = sign
       when 4
         @pos4 = sign
         @taken_arr.push(4)
+        @pos_hash[4] = sign
       when 5
         @pos5 = sign
         @taken_arr.push(5)
+        @pos_hash[5] = sign
       when 6
         @pos6 = sign
         @taken_arr.push(6)
+        @pos_hash[6] = sign
       when 7
         @pos7 = sign
         @taken_arr.push(7)
+        @pos_hash[7] = sign
       when 8
         @pos8 = sign
         @taken_arr.push(8)
+        @pos_hash[8] = sign
       when 9
         @pos9 = sign
         @taken_arr.push(9)
+        @pos_hash[9] = sign
       end
     end
     display_board
@@ -82,6 +92,9 @@ _ _ _ _ _
 
   def game_over?
     if @taken_arr.length == 9
+      #return true
+      # check if someone has won
+      p @pos_hash
       return true
     end
   end
