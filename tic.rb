@@ -104,3 +104,4 @@ until game_over
   board.get_field_pos(player2.num, player2.sign)
 
 end
+# comment
