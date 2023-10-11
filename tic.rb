@@ -9,9 +9,9 @@ class Player
 end
 
 class Board
-  @taken_arr = Array.new # collect the chosen field positions
 
   def initialize
+    @taken_arr = [] # collect the chosen field positions
     @pos1 = 1
     @pos2 = 2
     @pos3 = 3
@@ -27,20 +27,23 @@ class Board
   def update_board(field_pos, sign)
     if field_pos == 'init' # display board on start
       display_board
-    elsif @taken_arr.nil? or @taken_arr.include? field_pos # number already taken?
+    elsif @taken_arr.include? field_pos # position already taken?
       puts "Invalid number. Please enter one of the remaining numbers!"
       display_board
     else
-      case field_pos # assign value if position is valid, i.e. not occupied yet
+      case field_pos # assign value if position is available, i.e. not occupied yet by another player
       when 1
         @pos1 = sign
         @taken_arr.push(1)
+        p @taken_arr
       when 2
         @pos2 = sign
         @taken_arr.push(2)
+        p @taken_arr
       when 3
         @pos3 = sign
         @taken_arr.push(3)
+        p @taken_arr
       when 4
         @pos4 = sign
         @taken_arr.push(4)
@@ -104,4 +107,3 @@ until game_over
   board.get_field_pos(player2.name, player2.sign)
 
 end
-# comment
