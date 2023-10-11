@@ -25,25 +25,21 @@ class Board
   end
 
   def update_board(field_pos, sign)
-    if field_pos == 'init' # display board on start
-      display_board
-    elsif @taken_arr.include? field_pos # position already taken?
+    if @taken_arr.include? field_pos # position already taken?
       puts "Invalid number. Please enter one of the remaining numbers!"
       display_board
+      return false
     else
       case field_pos # assign value if position is available, i.e. not occupied yet by another player
       when 1
         @pos1 = sign
         @taken_arr.push(1)
-        p @taken_arr
       when 2
         @pos2 = sign
         @taken_arr.push(2)
-        p @taken_arr
       when 3
         @pos3 = sign
         @taken_arr.push(3)
-        p @taken_arr
       when 4
         @pos4 = sign
         @taken_arr.push(4)
@@ -65,6 +61,7 @@ class Board
       end
     end
     display_board
+    return true
   end
 
     def display_board
@@ -80,7 +77,13 @@ _ _ _ _ _
   def get_field_pos(play_name, sign)
     puts "#{play_name}, select a position (1-9): "
     field_pos = (gets.chomp).to_i
-    update_board(field_pos, sign)
+    return update_board(field_pos, sign)
+  end
+
+  def game_over?
+    if @taken_arr.length == 9
+      return true
+    end
   end
 end
 
@@ -100,10 +103,15 @@ board = Board.new
 
 # Loop until game has finished
 # get user input for field position
-game_over = false
-
-until game_over
-  board.get_field_pos(player1.name, player1.sign)
-  board.get_field_pos(player2.name, player2.sign)
-
+until board.game_over?
+  until board.get_field_pos(player1.name, player1.sign)
+  end
+  if board.game_over?
+    break
+  end
+  until board.get_field_pos(player2.name, player2.sign)
+  end
+  if board.game_over?
+    break
+  end
 end
