@@ -74,8 +74,8 @@ _ _ _ _ _
 #{@pos7} | #{@pos8} | #{@pos9}"
     end
 
-  def get_field_pos(play_num, sign)
-    puts "Player #{play_num}, select a position (1-9): "
+  def get_field_pos(play_name, sign)
+    puts "#{play_name}, select a position (1-9): "
     field_pos = (gets.chomp).to_i
     update_board(field_pos, sign)
   end
@@ -100,8 +100,8 @@ board = Board.new
 game_over = false
 
 until game_over
-  board.get_field_pos(player1.num, player1.sign)
-  board.get_field_pos(player2.num, player2.sign)
+  board.get_field_pos(player1.name, player1.sign)
+  board.get_field_pos(player2.name, player2.sign)
 
 end
 # comment
