@@ -77,13 +77,13 @@ class Board
   end
 
     def display_board
-      puts "#{@pos1} | #{@pos2} | #{@pos3}
+      puts "\n\n\n#{@pos1} | #{@pos2} | #{@pos3}
 _ _ _ _ _
 
 #{@pos4} | #{@pos5} | #{@pos6}
 _ _ _ _ _
 
-#{@pos7} | #{@pos8} | #{@pos9}"
+#{@pos7} | #{@pos8} | #{@pos9}\n\n\n"
     end
 
   def get_field_pos(play_name, sign)
@@ -106,10 +106,8 @@ _ _ _ _ _
       unless success_keys.keys.empty?
         if success_keys.keys.include?("X")
           puts "#{@player1.name} has won!"
-          p success_keys.keys
         else
           puts "#{@player2.name} has won!"
-          p success_keys.keys
         end
       end
     elsif @taken_arr.length == 9
