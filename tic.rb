@@ -10,7 +10,9 @@ end
 
 class Board
 
-  def initialize
+  def initialize(player1, player2)
+    @player1 = player1
+    @player2 = player2
     @taken_arr = [] # collect the chosen field positions
     @pos1 = 1
     @pos2 = 2
@@ -92,9 +94,23 @@ _ _ _ _ _
 
   def game_over?
     if @taken_arr.length >= 5
-      state, sign = success?
-      if state
-        puts "Player #{sign} has won!"
+      sign_arr = ['X', 'O']
+      success_hash = {}
+
+      sign_arr.each do |sign|
+        result, sign = success?(sign)
+        success_hash[sign] = result
+      end
+      success_keys = success_hash.select{ |k, v| v == true }
+
+      unless success_keys.keys.empty?
+        if success_keys.keys.include?("X")
+          puts "#{@player1.name} has won!"
+          p success_keys.keys
+        else
+          puts "#{@player2.name} has won!"
+          p success_keys.keys
+        end
       end
     elsif @taken_arr.length == 9
       puts "Nobody wins!"
@@ -102,29 +118,20 @@ _ _ _ _ _
     end
   end
 
-  def success?
-    # check if player has won
-    sign_arr = ['X', 'O']
-
-    sign_arr.each do |sign|
-      puts sign
-      if
-        # horizontal
-        @pos_hash.values_at(1, 2, 3).all?(sign) ||
-        @pos_hash.values_at(4, 5, 6).all?(sign) ||
-        @pos_hash.values_at(7, 8, 9).all?(sign) ||
-
-        # vertical
-        @pos_hash.values_at(1, 4, 7).all?(sign) ||
-        @pos_hash.values_at(2, 5, 8).all?(sign) ||
-        @pos_hash.values_at(3, 6, 9).all?(sign) ||
-
-        # diagonal
-        @pos_hash.values_at(1, 5, 9).all?(sign) ||
-        @pos_hash.values_at(7, 5, 3).all?(sign)
-
-        return true, sign
-      end
+  def success?(sign)
+    if
+      # horizontal
+      @pos_hash.values_at(1, 2, 3).all?(sign) ||
+      @pos_hash.values_at(4, 5, 6).all?(sign) ||
+      @pos_hash.values_at(7, 8, 9).all?(sign) ||
+      # vertical
+      @pos_hash.values_at(1, 4, 7).all?(sign) ||
+      @pos_hash.values_at(2, 5, 8).all?(sign) ||
+      @pos_hash.values_at(3, 6, 9).all?(sign) ||
+      # diagonal
+      @pos_hash.values_at(1, 5, 9).all?(sign) ||
+      @pos_hash.values_at(7, 5, 3).all?(sign)
+      return true, sign
     end
   end
 end
@@ -140,7 +147,7 @@ player1 = Player.new(name1, 'X', 1)
 player2 = Player.new(name2, 'O', 2)
 
 # display initial board with field positions
-board = Board.new
+board = Board.new(player1, player2)
 
 # Loop until game has finished
 # get user input for field position
