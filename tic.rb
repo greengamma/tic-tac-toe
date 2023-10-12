@@ -93,7 +93,7 @@ _ _ _ _ _
   end
 
   def game_over?
-    if @taken_arr.length >= 5
+    if @taken_arr.length >= 5 and @taken_arr.length < 9
       sign_arr = ['X', 'O']
       success_hash = {}
 
@@ -106,13 +106,17 @@ _ _ _ _ _
       unless success_keys.keys.empty?
         if success_keys.keys.include?("X")
           puts "#{@player1.name} has won!"
+          return true
         else
           puts "#{@player2.name} has won!"
+          return true
         end
       end
     elsif @taken_arr.length == 9
       puts "Nobody wins!"
       return true
+    else
+      return false
     end
   end
 
