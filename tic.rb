@@ -91,15 +91,43 @@ _ _ _ _ _
   end
 
   def game_over?
-    if @taken_arr.length == 9
-      #return true
-      # check if someone has won
-      p @pos_hash
+    if @taken_arr.length >= 5
+      state, sign = success?
+      if state
+        puts "Player #{sign} has won!"
+      end
+    elsif @taken_arr.length == 9
+      puts "Nobody wins!"
       return true
     end
   end
-end
 
+  def success?
+    # check if player has won
+    sign_arr = ['X', 'O']
+
+    sign_arr.each do |sign|
+      puts sign
+      if
+        # horizontal
+        @pos_hash.values_at(1, 2, 3).all?(sign) ||
+        @pos_hash.values_at(4, 5, 6).all?(sign) ||
+        @pos_hash.values_at(7, 8, 9).all?(sign) ||
+
+        # vertical
+        @pos_hash.values_at(1, 4, 7).all?(sign) ||
+        @pos_hash.values_at(2, 5, 8).all?(sign) ||
+        @pos_hash.values_at(3, 6, 9).all?(sign) ||
+
+        # diagonal
+        @pos_hash.values_at(1, 5, 9).all?(sign) ||
+        @pos_hash.values_at(7, 5, 3).all?(sign)
+
+        return true, sign
+      end
+    end
+  end
+end
 
 # get user input for names
 puts "Please enter the name of the 1st player (X): "
